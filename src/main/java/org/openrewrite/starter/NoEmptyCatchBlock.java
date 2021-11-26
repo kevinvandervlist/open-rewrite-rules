@@ -3,16 +3,9 @@ package org.openrewrite.starter;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
-import org.openrewrite.internal.NameCaseConvention;
-import org.openrewrite.java.ChangeMethodName;
 import org.openrewrite.java.JavaTemplate;
 import org.openrewrite.java.JavaVisitor;
-import org.openrewrite.java.MethodMatcher;
 import org.openrewrite.java.tree.J;
-import org.openrewrite.java.tree.Statement;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class NoEmptyCatchBlock extends Recipe {
     @Override
@@ -35,7 +28,7 @@ public class NoEmptyCatchBlock extends Recipe {
             public J visitCatch(J.Try.Catch _catch, ExecutionContext executionContext) {
                 J.Block body = _catch.getBody();
                 if(body.getStatements().isEmpty()) {
-                    // This is still a bit nasty, can probably be done better. 
+                    // This is still a bit nasty, can probably be done better.
                     J.Identifier var = _catch
                             .getParameter()
                             .getPadding()
