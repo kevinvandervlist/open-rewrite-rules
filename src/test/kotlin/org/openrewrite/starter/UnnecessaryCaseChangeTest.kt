@@ -16,12 +16,11 @@ class UnnecessaryCaseChangeTest: JavaRecipeTest {
         get() = UnnecessaryCaseChange()
 
     @Test
-    fun noUnnecessaryCaseChanges() = assertChanged(
+    fun noUnnecessaryCaseChangetoUpperLowerThenEquals() = assertChanged(
         before = """
             class Test {
                 public static boolean f(String p) {
                     "Abc".toUpperCase().equals("ABC");
-                    "abc".equals("ABC".toLowerCase());
                 }
             }
         """,
@@ -29,9 +28,27 @@ class UnnecessaryCaseChangeTest: JavaRecipeTest {
             class Test {
                 public static boolean f(String p) {
                     "Abc".equalsIgnoreCase("ABC");
+                }
+            }
+        """
+    )
+
+    @Test
+    fun noUnnecessaryCaseChangeInEquals() = assertChanged(
+        before = """
+            class Test {
+                public static boolean f(String p) {
+                    "abc".equals("ABC".toLowerCase());
+                }
+            }
+        """,
+        after = """
+            class Test {
+                public static boolean f(String p) {
                     "abc".equalsIgnoreCase("ABC");
                 }
             }
         """
     )
+    // TODO: String x = foo.toLowerCase(); x.equals("bar");
 }
