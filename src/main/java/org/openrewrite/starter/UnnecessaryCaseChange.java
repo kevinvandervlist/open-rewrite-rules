@@ -31,7 +31,6 @@ public class UnnecessaryCaseChange extends Recipe {
             @Override
             public J visitMethodInvocation(J.MethodInvocation method, ExecutionContext executionContext) {
                 System.out.println(method.getSimpleName() + "; " + isToLowerOrUpper(method));
-                System.out.println(method.get + "; " + isToLowerOrUpper(method));
                 if(EQ.matches(method)) {
                     System.out.println(method.getName());
                 }
