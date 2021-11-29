@@ -1,5 +1,6 @@
 package org.openrewrite.starter
 
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.openrewrite.Recipe
 import org.openrewrite.java.JavaParser
@@ -112,6 +113,79 @@ class AvoidDuplicateLiteralsTest: JavaRecipeTest {
                         }
                     }
                     return cip;
+                }
+            }
+        """
+    )
+
+    /**
+     * This test is disabled because the current recipe does not take the pre-existing 'FOO'
+     * property of the super class into account
+     */
+    @Test
+    @Disabled
+    fun shadowingTestSuper() = assertChanged(
+        before = """
+            class Super {
+                private static final String FOO = "super";
+            }
+            class Test extends Super {
+                public static boolean f(String p) {
+                    if("foo".equals(p)) {
+                        return true;
+                    } else if(!"fooBar".equals(p)) {
+                        return (p + "fooBar" + "foo" + FOO).equals(p);
+                    }
+                }
+            }
+        """,
+        after = """
+            class Super {
+                private static final String FOO = "super";
+            }
+            class Test extends Super {
+                private static final String _FOO = "foo";
+                private static final String FOO_BAR = "fooBar";
+                public static boolean f(String p) {
+                    if(FOO.equals(p)) {
+                        return true;
+                    } else if(!FOO_BAR.equals(p)) {
+                        return (p + FOO_BAR + _FOO + FOO).equals(p);
+                    }
+                }
+            }
+        """
+    )
+
+    /**
+     * This test is disabled because the current recipe does not take the pre-existing 'FOO' property into account
+     */
+    @Test
+    @Disabled
+    fun shadowingTest() = assertChanged(
+        before = """
+            class Test {
+                private static final String FOO = "predef";
+                public static boolean f(String p) {
+                    if("foo".equals(p)) {
+                        return true;
+                    } else if(!"fooBar".equals(p)) {
+                        return (p + "fooBar" + "foo" + FOO).equals(p);
+                    }
+                }
+            }
+        """,
+        after = """
+            class Test {
+                private static final String FOO = "predef";
+                private static final String _FOO = "foo";
+                private static final String FOO_BAR = "fooBar";
+                public static boolean f(String p) {
+                    if(FOO.equals(p)) {
+                        return true;
+                    } else if(!FOO_BAR.equals(p)) {
+                        return (p + FOO_BAR + _FOO + FOO).equals(p);
+                    }
                 }
             }
         """
