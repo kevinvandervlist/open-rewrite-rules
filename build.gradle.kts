@@ -1,6 +1,3 @@
-import nebula.plugin.contacts.Contact
-import nebula.plugin.contacts.ContactsExtension
-
 plugins {
     `java-library`
 
@@ -8,23 +5,24 @@ plugins {
     id("nebula.release") version "15.3.1"
 
     id("nebula.maven-manifest") version "17.3.2"
-    id("nebula.maven-nebula-publish") version "17.3.2"
     id("nebula.maven-resolved-dependencies") version "17.3.2"
 
-    id("nebula.contacts") version "5.1.0"
     id("nebula.info") version "9.3.0"
 
     id("nebula.javadoc-jar") version "17.3.2"
     id("nebula.source-jar") version "17.3.2"
+
+    //id("org.openrewrite.rewrite") version("5.14.0")
 }
 
-apply(plugin = "nebula.publish-verification")
+
 
 configure<nebula.plugin.release.git.base.ReleasePluginExtension> {
     defaultVersionStrategy = nebula.plugin.release.NetflixOssStrategies.SNAPSHOT(project)
 }
 
-group = "org.openrewrite.recipe"
+group = "nl.kevinvandervlist.recipes"
+version = "0.0.1"
 description = "Rewrite recipes."
 
 repositories {
@@ -60,7 +58,12 @@ dependencies {
 
     testImplementation("org.openrewrite:rewrite-test:${rewriteVersion}")
     testImplementation("org.assertj:assertj-core:latest.release")
+    //rewrite("nl.kevinvandervlist.recipes:company-recipes:0.0.1")
 }
+
+//rewrite {
+//    activeRecipe("nl.kevinvandervlist.RecipeCollection")
+//}
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
@@ -68,29 +71,6 @@ tasks.named<Test>("test") {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
-configure<ContactsExtension> {
-    val j = Contact("team@moderne.io")
-    j.moniker("Team Moderne")
-    people["team@moderne.io"] = j
-}
-
-configure<PublishingExtension> {
-    publications {
-        named("nebula", MavenPublication::class.java) {
-            suppressPomMetadataWarningsFor("runtimeElements")
-        }
-    }
-}
-
-publishing {
-  repositories {
-      maven {
-          name = "moderne"
-          url = uri("https://us-west1-maven.pkg.dev/moderne-dev/moderne-recipe")
-      }
-  }
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }

@@ -1,5 +1,6 @@
 package org.openrewrite.starter
 
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.openrewrite.Recipe
 import org.openrewrite.java.JavaParser
@@ -16,6 +17,7 @@ class UnnecessaryCaseChangeTest: JavaRecipeTest {
         get() = UnnecessaryCaseChange()
 
     @Test
+    @Disabled
     fun noUnnecessaryCaseChangetoUpperLowerThenEquals() = assertChanged(
         before = """
             class Test {
@@ -34,6 +36,7 @@ class UnnecessaryCaseChangeTest: JavaRecipeTest {
     )
 
     @Test
+    @Disabled
     fun noUnnecessaryCaseChangeInEquals() = assertChanged(
         before = """
             class Test {

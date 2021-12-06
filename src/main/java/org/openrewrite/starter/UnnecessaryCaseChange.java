@@ -60,9 +60,9 @@ public class UnnecessaryCaseChange extends Recipe {
                     if(head instanceof J.MethodInvocation &&
                             isToLowerOrUpper((J.MethodInvocation) head)) {
                         J.MethodInvocation h = (J.MethodInvocation) head;
-                        J.MethodInvocation updated = newEqualsIgnoreCase.withTemplate(method.withTemplate(newEqualsIgnoreCase, method.getCoordinates().replaceMethod(), method.getSelect(), h.getSelect());
-                        System.out.println(updated);
-                        return updated;
+                        //J.MethodInvocation updated = newEqualsIgnoreCase.withTemplate(method.withTemplate(newEqualsIgnoreCase, method.getCoordinates().replaceMethod(), method.getSelect(), h.getSelect()));
+                        //System.out.println(updated);
+                        //return updated;
                         //System.out.println(h.getSelect());
                     }
                 }
