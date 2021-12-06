@@ -1,40 +1,3 @@
-parameters:
-  # Required. Service connection to use to get to the keyvault
-  - name: azure_subscription
-    type: string
-
-  # Required. name of keyvault to use to retrieve secrets from.
-  # in vault you should have
-  # Publish to forge: forgeToken
-  # Publish to confluence: confluenceNPAUsername, confluenceNPAPassword
-  - name: key_vault_name
-    type: string
-
-  # Optional
-  - name: do_mongodbimport
-    type: boolean
-    default: false
-
-  # Optional
-  - name: uri
-    type: string
-    default: $(mongodb-uri)
-
-  # Optional
-  - name: database_name
-    type: string
-    default: quale-db
-
-  # Optional
-  - name: collection_name
-    type: string
-    default: tool-collection
-
-  # Optional
-  - name: json_file_path
-    type: string
-    default: $(System.DefaultWorkingDirectory)/issues.csv.json
-
 stages:
   - stage: openrewrite
     displayName: OpenRewrite recipes
@@ -65,10 +28,23 @@ stages:
                     # Add a new block:
                     echo -e "rewrite { \n  activeRecipe("nl.kevinvandervlist.RecipeCollection") \n}"
                   fi
+                  if [ -f "pom.xml"]; then
+                    echo "todo: configure the pom automatically"
+                  fi
               displayName: 'Publish recipes to maven local'
 
           - task: Bash@3
             inputs:
               script: |
-                ./gradlew --no-daemon rewriteDryRun
+                if [ -f "build.gradle.kts"]; then
+                  ./gradlew --no-daemon rewriteDryRun
+                fi
+                if [ -f "pom.xml"]; then
+                  mvn rewrite:dryRun
+                fi
             displayName: 'Create patch'
+
+          - task: PublishBuildArtifacts@1
+            inputs:
+              pathToPublish: "/target/site/rewrite/rewrite.patch"
+              artifactName: OpenRewritePatch

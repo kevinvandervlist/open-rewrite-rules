@@ -1,3 +1,29 @@
+# Test SEA
+Figure out how to enable the `company.yml`
+To enable: in `<build><plugins>` add:
+```xml
+<plugin>
+  <groupId>org.openrewrite.maven</groupId>
+  <artifactId>rewrite-maven-plugin</artifactId>
+  <version>4.14.1</version>
+  <configuration>
+    <activeRecipes>
+      <!--<recipe>nl.kevinvandervlist.RecipeCollection</recipe>-->
+      <recipe>org.openrewrite.starter.AvoidDuplicateLiterals</recipe>
+      <recipe>org.openrewrite.starter.NoEmptyCatchBlock</recipe>
+      <recipe>org.openrewrite.starter.SnakeCaseToCamelCaseExceptWhenPublic</recipe>
+    </activeRecipes>
+  </configuration>
+  <dependencies>
+    <dependency>
+      <groupId>nl.kevinvandervlist.recipes</groupId>
+      <artifactId>company-recipes</artifactId>
+      <version>0.0.1</version>
+    </dependency>
+  </dependencies>
+</plugin>
+```
+
 ## Rewrite recipe starter
 
 This repository serves as a template for building your own recipe JARs and publishing them to a repository where they can be applied on [app.moderne.io](https://app.moderne.io) against all of the public OSS code that is included there.

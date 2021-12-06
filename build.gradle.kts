@@ -12,7 +12,7 @@ plugins {
     id("nebula.javadoc-jar") version "17.3.2"
     id("nebula.source-jar") version "17.3.2"
 
-    //id("org.openrewrite.rewrite") version("5.14.0")
+    id("org.openrewrite.rewrite") version("5.14.0")
 }
 
 
@@ -58,12 +58,12 @@ dependencies {
 
     testImplementation("org.openrewrite:rewrite-test:${rewriteVersion}")
     testImplementation("org.assertj:assertj-core:latest.release")
-    //rewrite("nl.kevinvandervlist.recipes:company-recipes:0.0.1")
+    rewrite("nl.kevinvandervlist.recipes:company-recipes:0.0.1")
 }
 
-//rewrite {
-//    activeRecipe("nl.kevinvandervlist.RecipeCollection")
-//}
+rewrite {
+    activeRecipe("nl.kevinvandervlist.RecipeCollection")
+}
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
@@ -71,6 +71,6 @@ tasks.named<Test>("test") {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
