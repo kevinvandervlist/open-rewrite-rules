@@ -1,4 +1,4 @@
-package org.openrewrite.starter;
+package nl.kevinvandervlist.rewrite;
 
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;

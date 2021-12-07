@@ -15,7 +15,7 @@
  *
  * Based on https://github.com/openrewrite/rewrite/blob/main/rewrite-java/src/main/java/org/openrewrite/java/cleanup/ReplaceDuplicateStringLiterals.java
  */
-package org.openrewrite.starter;
+package nl.kevinvandervlist.rewrite;
 
 import org.jetbrains.annotations.NotNull;
 import org.openrewrite.*;

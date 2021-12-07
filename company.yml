@@ -1,8 +1,0 @@
----
-type: specs.openrewrite.org/v1beta/recipe
-name: nl.kevinvandervlist.RecipeCollection
-recipeList:
-  - org.openrewrite.starter.AvoidDuplicateLiterals
-  - org.openrewrite.starter.NoEmptyCatchBlock
-  - org.openrewrite.starter.SnakeCaseToCamelCaseExceptWhenPublic
-

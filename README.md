@@ -9,9 +9,9 @@ To enable: in `<build><plugins>` add:
   <configuration>
     <activeRecipes>
       <!--<recipe>nl.kevinvandervlist.RecipeCollection</recipe>-->
-      <recipe>org.openrewrite.starter.AvoidDuplicateLiterals</recipe>
-      <recipe>org.openrewrite.starter.NoEmptyCatchBlock</recipe>
-      <recipe>org.openrewrite.starter.SnakeCaseToCamelCaseExceptWhenPublic</recipe>
+      <recipe>nl.kevinvandervlist.rewrite.AvoidDuplicateLiterals</recipe>
+      <recipe>nl.kevinvandervlist.rewrite.NoEmptyCatchBlock</recipe>
+      <recipe>nl.kevinvandervlist.rewrite.SnakeCaseToCamelCaseExceptWhenPublic</recipe>
     </activeRecipes>
   </configuration>
   <dependencies>

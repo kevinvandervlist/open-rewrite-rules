@@ -16,24 +16,6 @@ stages:
             displayName: 'Publish recipes to maven local'
 
           - task: Bash@3
-              inputs:
-                script: |
-                  if [ -f "build.gradle.kts"]; then
-                    echo "todo: Add to plugins: "
-                    echo "id("org.openrewrite.rewrite") version("5.14.0")"
-                    echo "todo: Adding dependency to gradle"
-                    # In dependencies block: add:
-                    echo 'rewrite("nl.kevinvandervlist.recipes:company-recipes:0.0.1")'
-                    echo "todo: Activating recipe"
-                    # Add a new block:
-                    echo -e "rewrite { \n  activeRecipe("nl.kevinvandervlist.RecipeCollection") \n}"
-                  fi
-                  if [ -f "pom.xml"]; then
-                    echo "todo: configure the pom automatically"
-                  fi
-              displayName: 'Publish recipes to maven local'
-
-          - task: Bash@3
             inputs:
               script: |
                 if [ -f "build.gradle.kts"]; then

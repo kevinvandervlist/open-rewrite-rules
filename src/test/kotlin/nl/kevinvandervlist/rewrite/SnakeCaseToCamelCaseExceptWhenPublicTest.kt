@@ -1,4 +1,4 @@
-package org.openrewrite.starter
+package nl.kevinvandervlist.rewrite
 
 import org.junit.jupiter.api.Test
 import org.openrewrite.Recipe
